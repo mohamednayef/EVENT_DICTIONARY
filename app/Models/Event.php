@@ -11,8 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Event extends Model
 {
     // Use requirements
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     // Attributes could be fillable
     protected $fillable = [

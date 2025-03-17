@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users','id');
             $table->foreignId('event_id')->constrained('events','id');
-            $table->enum('rating',['1', '0', '-1'])->nullable();
+            $table->enum('rating',["1", "0", "-1"])->default("0");
             $table->timestamps();
             $table->softDeletes();
         });

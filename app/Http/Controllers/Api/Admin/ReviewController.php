@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\ReviewRequest;
 use App\Models\Review;
+use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller
 {
@@ -15,15 +14,8 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $reviews = Review::all();
+        return response()->json($reviews);
     }
 
     /**
@@ -32,14 +24,13 @@ class ReviewController extends Controller
     public function store(ReviewRequest $request)
     {
         Review::create([
-            // 'user_id' => Auth::id(),
             'user_id' => $request->user_id,
             'event_id' => $request->event_id,
             'rating' => $request->rating,
         ]);
 
         return response()->json([
-            'message' => 'The review wes recoreded',
+            'message' => 'The Review Stored Successfully!',
         ]);
     }
 
@@ -48,15 +39,8 @@ class ReviewController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $review = Review::findOrFail($id);
+        return response()->json($review);
     }
 
     /**
@@ -64,7 +48,7 @@ class ReviewController extends Controller
      */
     public function update(ReviewRequest $request, string $id)
     {
-        $review = Review::findOrfail($id);
+        $review = Review::findOrFail($id);
         $review->update([
             'user_id' => $request->user_id,
             'event_id' => $request->event_id,
@@ -72,7 +56,7 @@ class ReviewController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'The review updated successfully!',
+            'message' => 'The Review Updated Successfully!',
         ]);
     }
 
@@ -81,6 +65,11 @@ class ReviewController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $review = Review::findOrFail($id);
+        $review->delete();
+
+        return response()->json([
+            'message' => 'The Review Deleted Successfully!',
+        ]);
     }
 }
