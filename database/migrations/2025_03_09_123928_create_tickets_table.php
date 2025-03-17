@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users', 'id')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('event_id')->constrained('events','id')->onDelete('cascade')->onUpdate('cascade');
-            $table->enum('event_type',['regular','VIP'])->default('regular');
+            $table->enum('type',['regular','VIP'])->default('regular');
+            $table->enum('status',['booked','canceled'])->default('booked');
             $table->decimal('price');
-            $table->unsignedBigInteger('quantity');
             $table->timestamps();
             $table->softDeletes();
         });

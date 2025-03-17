@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Admin\PaymentController;
 use App\Http\Controllers\Api\Admin\ReviewController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\BookmarkController;
+use App\Http\Controllers\Api\Admin\TicketController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function() {
@@ -18,6 +19,7 @@ Route::prefix('admin')->group(function() {
         'payments' => PaymentController::class,
         'reviews' => ReviewController::class,
         'bookmarks' => BookmarkController::class,
+        'tickets' => TicketController::class,
     ]);
 });
 

@@ -2,8 +2,8 @@
 
 namespace App\Enums;
 
-enum Ticket: string
+enum TicketType: string
 {
-    case REGOLAR = 'REGOLAR';
+    case REGULAR = 'regular';
     case VIP = 'VIP';
 }

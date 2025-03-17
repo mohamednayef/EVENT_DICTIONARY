@@ -54,7 +54,23 @@ class User extends Authenticatable
         ];
     }
 
-    public function bookmarks() {
-        // $this->hasMany(BookMarks::class, '')
+    public function bookmarks() 
+    {
+        $this->hasMany(Bookmark::class);
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
     }
 }

@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('descriptoin');
+            $table->text('description');
             $table->date('date');
             $table->enum('category',['concert','theater','sports','conference'])->default('concert');
             $table->text('location');
             $table->unsignedBigInteger('capacity');
             $table->unsignedBigInteger('available_tickets');
+            $table->text('image_path')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

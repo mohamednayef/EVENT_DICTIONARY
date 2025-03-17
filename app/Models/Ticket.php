@@ -16,7 +16,9 @@ class Ticket extends Model
     protected $fillable = [
         'user_id',
         'event_id',
-        'rating',
+        'type',
+        'status',
+        'price',
     ];
 
     // if the table doesn't have timestaps add this line to turnoff
@@ -28,6 +30,11 @@ class Ticket extends Model
     //     'isActive' => 'boolean',
     //     'publishedAt' => 'datetime',
     // ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function event() {
         return $this->belongsTo(Event::class);

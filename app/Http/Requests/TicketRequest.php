@@ -5,6 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 use App\Enums\Ticket;
+use App\Enums\TicketStatus;
+use App\Enums\TicketType;
 
 class TicketRequest extends FormRequest
 {
@@ -24,8 +26,11 @@ class TicketRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_id' => ['required', 'integer'],
             'event_id' => ['required', 'integer'],
-            'ticket_type' => ['required', new Enum(Ticket::class)],
+            'type' => ['required', new Enum(TicketType::class)],
+            'status' => ['nullable', new Enum(TicketStatus::class)],
+            'price' => ['required', 'integer'],
         ];
     }
 }

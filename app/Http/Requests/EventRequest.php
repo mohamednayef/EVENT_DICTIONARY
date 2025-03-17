@@ -23,10 +23,11 @@ class EventRequest extends FormRequest
      */
     public function rules(): array
     {
+        // return ["here"];
         return [
             'name' => ['required', 'string', 'min:4', 'max:50'],
             'description' => ['required', 'string', 'max:400'],
-            'date' => ['required', 'date_format:Y-m-d H:i:s'],
+            'date' => ['required', 'date_format:Y-m-d'],
             'category' => ['required', new Enum(Category::class)],
             'location' => ['required', 'string'],
             'capacity' => ['required', 'integer', 'min:1', 'max:5000'],

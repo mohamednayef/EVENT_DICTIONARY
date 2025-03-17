@@ -17,12 +17,13 @@ class Event extends Model
     // Attributes could be fillable
     protected $fillable = [
         'name',
-        'descriptoin',
+        'description',
         'date',
         'category',
         'location',
         'capacity',
         'available_tickets',
+        'image_path',
     ];
 
     // Attributes can't be fillable

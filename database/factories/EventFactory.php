@@ -20,7 +20,7 @@ class EventFactory extends Factory
     {
         return [
             'name' => Str::random(10),
-            'descriptoin' => Str::random(100),
+            'description' => Str::random(100),
             'date' => fake()->dateTimeBetween('-1 year', '+1 year'),
             'category' => fake()->randomElement(Category::cases())->value,
             'location' => fake()->address(),

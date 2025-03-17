@@ -23,6 +23,7 @@ class EventController extends Controller
      */
     public function store(EventRequest $request)
     {
+        // return $request;
         Event::create([
             'name' => $request->name,
             'description' => $request->description,
