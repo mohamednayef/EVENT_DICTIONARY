@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\BookmarkRequest;
 use App\Models\Bookmark;
+use App\Http\Requests\BookmarkRequest;
 
 class BookmarkController extends Controller
 {
@@ -14,15 +14,8 @@ class BookmarkController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $bookmarks = Bookmark::all();
+        return response()->json($bookmarks);
     }
 
     /**
@@ -36,7 +29,7 @@ class BookmarkController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'The event added to wishlist successfully!',
+            'message' => 'The book mark Stored Successfully!',
         ]);
     }
 
@@ -45,15 +38,8 @@ class BookmarkController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $bookmark = Bookmark::findOrFail($id);
+        return response()->json($bookmark);
     }
 
     /**
@@ -61,7 +47,15 @@ class BookmarkController extends Controller
      */
     public function update(BookmarkRequest $request, string $id)
     {
+        $bookmark = Bookmark::findOrFail($id);
+        $bookmark->update([
+            'user_id' => $request->user_id,
+            'event_id' => $request->event_id,
+        ]);
 
+        return response()->json([
+            'message' => 'The Bookmark Updated Succesfully!',
+        ]);
     }
 
     /**
@@ -70,10 +64,10 @@ class BookmarkController extends Controller
     public function destroy(string $id)
     {
         $bookmark = Bookmark::findOrFail($id);
-        $bookmark->forceDelete();
+        $bookmark->delete();
 
         return response()->json([
-            'message' => 'The event was deleted from wishlist successfully!',
+            'message' => 'The Bookmark Deleted Succesfully!',
         ]);
     }
 }
