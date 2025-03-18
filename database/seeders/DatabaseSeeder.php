@@ -17,10 +17,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->count(39)->create();
-        Event::factory()->count(39)->create();
-        Ticket::factory()->count(39)->create();
-        Bookmark::factory()->count(39)->create();
-        Review::factory()->count(39)->create();
+        $this->call(UserSeeder::class);
+
+        // User::factory()->count(39)->create();
+        // Event::factory()->count(39)->create();
+        // Ticket::factory()->count(39)->create();
+        // Bookmark::factory()->count(39)->create();
+        // Review::factory()->count(39)->create();
     }
 }
