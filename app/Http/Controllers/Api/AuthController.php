@@ -54,10 +54,16 @@ class AuthController extends Controller
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            $token = $user->createToken('ApiToken')->plainTextToken;
+
+            $existingToken = $user->tokens()->where('name', 'ApiToken')->first();
+            if ($existingToken) {
+                $existingToken->delete();
+            }
+
+            $newToken = $user->createToken('ApiToken')->plainTextToken;
             return ApiHelper::getResponse(201, 'User logedin successfully!',
                 [
-                    'token' => $token,
+                    'token' => $newToken,
                 ]
             );
         } else {

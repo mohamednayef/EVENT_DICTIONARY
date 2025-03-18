@@ -16,8 +16,12 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->role != 'admin') {
-            return response()->json('message', 'You are not allowed to access this page');
+        if(Auth::check()) {
+            if(Auth::user()->role != 'admin') {
+                return response()->json('message', 'You are not allowed to access this page');
+            }
+        } else {
+            return response()->json(['message', 'U r not loged in']);
         }
         return $next($request);
     }
