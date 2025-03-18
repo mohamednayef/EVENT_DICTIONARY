@@ -44,14 +44,9 @@ class AuthController extends Controller
             'role' => 'customer',
         ]);
 
-        $token = $user->createToken('ApiToken')->plainTextToken; 
         return ApiHelper::getResponse(
             201, 
             'User registered successfully', 
-            [
-                'user' => $user,
-                'token' => $token
-            ]
         );  
     }
 
