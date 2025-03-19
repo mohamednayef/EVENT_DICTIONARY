@@ -4,11 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
-use App\Enums\Ticket;
-use App\Enums\TicketStatus;
-use App\Enums\TicketType;
+use App\Enums\PaymentMethod;
+use App\Enums\PaymentStatus;
 
-class TicketRequest extends FormRequest
+class PaymentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,9 +27,9 @@ class TicketRequest extends FormRequest
         return [
             'user_id' => ['required', 'integer'],
             'event_id' => ['required', 'integer'],
-            'type' => ['required', new Enum(TicketType::class)],
-            'status' => ['nullable', new Enum(TicketStatus::class)],
-            'price' => ['required', 'numeric'],
+            'payment_method' => ['required', new Enum(PaymentMethod::class)],
+            'payment_status' => ['required', new Enum(PaymentStatus::class)],
+            'total_price' => ['required', 'numeric'],
         ];
     }
 }

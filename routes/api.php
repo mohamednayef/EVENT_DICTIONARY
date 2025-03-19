@@ -8,14 +8,13 @@ use App\Http\Controllers\Api\Admin\BookmarkController;
 use App\Http\Controllers\Api\Admin\TicketController;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
-
 use Symfony\Component\HttpFoundation\Request;
 
 Route::get('/', function() {
     return '<h1 align="center">welcome in api</h1>';
 });
 
-Route::middleware(['auth:sanctum','IsAdmin'])->prefix('admin')->group(function() {
+Route::middleware(['auth:sanctum','IsAdmin'])->group(function() {
     Route::apiResources([
         'users' => UserController::class,
         'events' => EventController::class,

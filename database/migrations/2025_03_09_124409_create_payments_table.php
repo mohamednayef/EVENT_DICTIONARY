@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users','id');
             $table->foreignId('event_id')->constrained('events','id');
-            $table->enum('pyment_method',['vodafone_cach','myfawry','paypay'])->default('vodafone_cach');
-            $table->enum('pyment_status',['paid','faild','refurded'])->default('paid');
+            $table->enum('payment_method',['vodafone_cash','myfawry','paypal'])->default('vodafone_cash');
+            $table->enum('payment_status',['paid','faild','refurded'])->default('paid');
+            $table->decimal('total_price');
             $table->timestamps();
             $table->softDeletes();
         });
