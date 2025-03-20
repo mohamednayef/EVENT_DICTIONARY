@@ -26,11 +26,14 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function() {
 // Routes for Authenticated Users
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/events', [EventController::class, 'index']); // View events
+    Route::get('/events/{id}', [EventController::class, 'show']); // View specific event
     Route::post('/bookmarks', [BookmarkController::class, 'store']); // Add bookmark
+    Route::put('/bookmarks', [BookmarkController::class, 'update']); // update bookmark
     Route::get('/bookmarks', [BookmarkController::class, 'index']); // View bookmarks
     Route::post('/reviews', [ReviewController::class, 'store']); // Submit reviews
     Route::post('/tickets', [TicketController::class, 'store']); // Buy tickets
-    Route::get('/tickets', [TicketController::class, 'index']); // View tickets
+    Route::get('/tickets/{id}', [TicketController::class, 'show']); // Show specific ticket
+    Route::put('/tickets/{id}', [TicketController::class, 'update']); // Update specific ticket
     Route::post('/payments', [PaymentController::class, 'store']); // Make payments
     
     Route::get('/mytickets', [TicketController::class, 'mytickets']);
