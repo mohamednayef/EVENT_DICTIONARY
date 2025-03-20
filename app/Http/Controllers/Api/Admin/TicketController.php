@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\TicketRequest;
 use App\Models\Ticket;
-
+use Illuminate\Support\Facades\Auth;
 class TicketController extends Controller
 {
     /**
@@ -75,5 +75,12 @@ class TicketController extends Controller
         return response()->json([
             'message' => 'Ticket Deleted Succesfully!',
         ]);
+    }
+
+    public function mytickets()
+    {
+        $mytickets = Ticket::where('user_id', Auth::id())->get();
+
+        return response()->json($mytickets);
     }
 }

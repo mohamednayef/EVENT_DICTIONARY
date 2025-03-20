@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PaymentRequest;
 use App\Models\Payment;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -75,5 +76,12 @@ class PaymentController extends Controller
         return response()->json([
             'message' => 'Payment deleted successfully!',
         ]);
+    }
+
+    public function mypayments()
+    {
+        $mypayments = Payment::where('user_id', Auth::id())->get();
+
+        return response()->json($mypayments);
     }
 }
