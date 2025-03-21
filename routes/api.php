@@ -31,6 +31,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/bookmarks', [BookmarkController::class, 'update']); // update bookmark
     Route::get('/bookmarks', [BookmarkController::class, 'index']); // View bookmarks
     Route::post('/reviews', [ReviewController::class, 'store']); // Submit reviews
+    Route::get('/reviews', [ReviewController::class, 'index']); // All reviews
     Route::post('/tickets', [TicketController::class, 'store']); // Buy tickets
     Route::get('/tickets/{id}', [TicketController::class, 'show']); // Show specific ticket
     Route::put('/tickets/{id}', [TicketController::class, 'update']); // Update specific ticket
