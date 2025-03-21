@@ -30,7 +30,7 @@ class AuthController extends Controller
         ]);
 
         if($validator->fails()) {
-            return ApiHelper::getResponse(422, 'Validation failed', $validator->errors());
+            return ApiHelper::getResponse(422, 'faild', $validator->errors());
         }
 
         $user = User::create([
@@ -46,7 +46,7 @@ class AuthController extends Controller
 
         return ApiHelper::getResponse(
             201, 
-            'User registered successfully', 
+            'success', 
         );  
     }
 
@@ -61,14 +61,14 @@ class AuthController extends Controller
             }
 
             $newToken = $user->createToken('ApiToken')->plainTextToken;
-            return ApiHelper::getResponse(201, 'User logedin successfully!',
+            return ApiHelper::getResponse(201, 'success!',
                 [
                     'token' => $newToken,
                     'user' => $user,
                 ]
             );
         } else {
-            return ApiHelper::getResponse(404, 'not found');
+            return ApiHelper::getResponse(404, 'faild');
         }
     }
 
@@ -77,7 +77,7 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
         return ApiHelper::getResponse(
             201, 
-            'User logedout successfully'
+            'success'
         ); 
     }
 }
