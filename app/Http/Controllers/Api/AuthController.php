@@ -64,6 +64,7 @@ class AuthController extends Controller
             return ApiHelper::getResponse(201, 'User logedin successfully!',
                 [
                     'token' => $newToken,
+                    'user' => $user,
                 ]
             );
         } else {
