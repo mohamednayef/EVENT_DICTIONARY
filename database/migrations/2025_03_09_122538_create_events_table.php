@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('location');
             $table->unsignedBigInteger('capacity');
             $table->unsignedBigInteger('available_tickets');
+            $table->decimal('price');
             $table->text('image_path')->nullable();
             $table->timestamps();
             $table->softDeletes();

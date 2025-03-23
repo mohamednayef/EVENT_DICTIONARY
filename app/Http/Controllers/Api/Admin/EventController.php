@@ -33,6 +33,7 @@ class EventController extends Controller
             'location' => $request->location,
             'capacity' => $request->capacity,
             'available_tickets' => $request->capacity,
+            'price' => $request->price,
         ]);
 
         return response()->json([
@@ -62,6 +63,7 @@ class EventController extends Controller
             'category' => $request->category,
             'location' => $request->location,
             'capacity' => $request->capacity,
+            'price' => $request->price,
         ]);
 
         return response()->json([

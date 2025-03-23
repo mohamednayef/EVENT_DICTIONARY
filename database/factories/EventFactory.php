@@ -28,6 +28,7 @@ class EventFactory extends Factory
             'location' => fake()->address(),
             'capacity' => $capacity = fake()->numberBetween(200, 5000),
             'available_tickets' => fake()->numberBetween(0, $capacity),
+            'price' => fake()->numberBetween(100, 10000),
         ];
     }
 }

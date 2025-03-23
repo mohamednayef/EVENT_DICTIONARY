@@ -32,6 +32,7 @@ class EventRequest extends FormRequest
             'date' => ['required', 'date_format:Y-m-d'],
             'location' => ['required', 'string'],
             'capacity' => ['required', 'integer', 'min:1', 'max:5000'],
+            'price' => ['required', 'numeric'],
         ];
     }
 

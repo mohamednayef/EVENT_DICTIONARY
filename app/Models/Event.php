@@ -23,6 +23,7 @@ class Event extends Model
         'location',
         'capacity',
         'available_tickets',
+        'price',
         'image_path',
     ];
 
