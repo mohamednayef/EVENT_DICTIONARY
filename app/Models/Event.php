@@ -16,6 +16,7 @@ class Event extends Model
     // Attributes could be fillable
     protected $fillable = [
         'category_id',
+        'category',
         'name',
         'description',
         'date',

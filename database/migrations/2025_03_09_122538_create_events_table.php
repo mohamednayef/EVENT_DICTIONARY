@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            // $table->enum('category',['concert','theater','sports','conference'])->default('concert');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->enum('category',['concert','theater','sports','conference'])->default('concert');
             $table->string('name');
             $table->text('description');
             $table->date('date');

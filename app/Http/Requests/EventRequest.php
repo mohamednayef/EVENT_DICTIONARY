@@ -25,6 +25,7 @@ class EventRequest extends FormRequest
     {
         // return ["here"];
         return [
+            'category_id' => ['required', 'integer'],
             'category' => ['required', 'string'],
             'name' => ['required', 'string', 'min:4', 'max:50'],
             'description' => ['required', 'string', 'max:400'],
