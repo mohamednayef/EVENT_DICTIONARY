@@ -11,16 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            // $table->enum('category',['concert','theater','sports','conference'])->default('concert');
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
-            $table->text('description');
-            $table->date('date');
-            $table->text('location');
-            $table->unsignedBigInteger('capacity');
-            $table->unsignedBigInteger('available_tickets');
             $table->text('image_path')->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -32,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('categories');
     }
 };

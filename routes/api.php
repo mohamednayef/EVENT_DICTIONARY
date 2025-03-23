@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Admin\PaymentController;
 use App\Http\Controllers\Api\Admin\ReviewController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\BookmarkController;
+use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\TicketController;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,7 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function() {
         'events' => EventController::class, // Admin manages events
         'payments' => PaymentController::class, // Admin manages payments
         'tickets' => TicketController::class, // Admin manages tickets
+        'categories' => CategoryController::class,
     ]);
 });
 
@@ -39,6 +41,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::get('/mytickets', [TicketController::class, 'mytickets']);
     Route::get('/mypayments', [PaymentController::class, 'mypayments']);
+
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/categories/{id}', [CategoryController::class, 'show']);
     
     Route::post('/logout', [AuthController::class, 'logout']);
 });

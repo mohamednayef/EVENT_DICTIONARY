@@ -15,10 +15,10 @@ class Event extends Model
 
     // Attributes could be fillable
     protected $fillable = [
+        'category_id',
         'name',
         'description',
         'date',
-        'category',
         'location',
         'capacity',
         'available_tickets',
@@ -41,5 +41,15 @@ class Event extends Model
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

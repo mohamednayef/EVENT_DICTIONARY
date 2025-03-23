@@ -14,7 +14,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        // $events = Event::all();
+        $events = Event::withCount('reviews')->get();
         return response()->json($events);
     }
 

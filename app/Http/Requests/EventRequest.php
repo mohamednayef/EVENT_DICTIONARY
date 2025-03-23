@@ -25,10 +25,10 @@ class EventRequest extends FormRequest
     {
         // return ["here"];
         return [
+            'category' => ['required', 'string'],
             'name' => ['required', 'string', 'min:4', 'max:50'],
             'description' => ['required', 'string', 'max:400'],
             'date' => ['required', 'date_format:Y-m-d'],
-            'category' => ['required', new Enum(Category::class)],
             'location' => ['required', 'string'],
             'capacity' => ['required', 'integer', 'min:1', 'max:5000'],
         ];

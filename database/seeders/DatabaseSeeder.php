@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Ticket;
 use App\Models\Bookmark;
 use App\Models\Payment;
+use App\Models\Category;
 
 use App\Models\Review;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -21,8 +22,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserSeeder::class);
         $this->call(PersonalAccessTokenSeeder::class);
+        $this->call(CategorySeeder::class);
 
         User::factory()->count(39)->create();
+        // Category::factory()->count(39)->create();
         Event::factory()->count(39)->create();
         Ticket::factory()->count(39)->create();
         Bookmark::factory()->count(39)->create();
