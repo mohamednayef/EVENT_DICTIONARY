@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Bookmark;
 use App\Http\Requests\BookmarkRequest;
+use Illuminate\Support\Facades\Auth;
 
 class BookmarkController extends Controller
 {
@@ -69,5 +70,12 @@ class BookmarkController extends Controller
         return response()->json([
             'message' => 'The Bookmark Deleted Succesfully!',
         ]);
+    }
+
+    public function mybookmarks()
+    {
+        $myBookmarks = Bookmark::where('user_id', Auth::id())->get();
+
+        return response()->json($myBookmarks);
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Admin\BookmarkController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\TicketController;
 use App\Http\Controllers\Api\AuthController;
+use App\Models\Bookmark;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function() {
@@ -41,6 +42,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::get('/mytickets', [TicketController::class, 'mytickets']);
     Route::get('/mypayments', [PaymentController::class, 'mypayments']);
+    Route::get('/mybookmarks', [BookmarkController::class, 'mybookmarks']);
 
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::get('/categories/{id}', [CategoryController::class, 'show']);
