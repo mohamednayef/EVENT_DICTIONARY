@@ -46,7 +46,7 @@ class EventController extends Controller
      */
     public function show(string $id)
     {
-        $event = Event::findOrFail($id);
+        $event = Event::withCount('reviews')->findOrFail($id);
         return response()->json($event);
     }
 
