@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PaymentRequest;
 use App\Models\Payment;
+use App\Models\Event;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
+use Stripe\Stripe;
+use Stripe\Charge;
 
 class PaymentController extends Controller
 {
@@ -24,17 +28,28 @@ class PaymentController extends Controller
      */
     public function store(PaymentRequest $request)
     {
-        Payment::create([
-            'user_id' => $request->user_id,
-            'event_id' => $request->event_id,
-            'payment_method' => $request->payment_method,
-            'payment_status' => $request->payment_status,
-            'total_price' => $request->total_price,
-        ]);
+        // $priceOfTicket = Event::where('id', $request->event_id)->value('price');
+        // Payment::create([
+        //     'user_id' => Auth::id(),
+        //     'event_id' => $request->event_id,
+        //     'nu_of_tickets' => $request->nu_of_tickets,
+        //     'total_price' => $request->nu_of_tickets * $priceOfTicket,
+        //     'payment_method' => $request->payment_method,
+        //     'payment_status' => $request->payment_status,
+        // ]);
 
-        return response()->json([
-            'message' => 'Payment stored successfully!',
-        ]);
+        // for($i=0; $i<$request->nu_of_tickets; $i++) {
+        //     Ticket::create([
+        //         'user_id' => Auth::id(),
+        //         'event_id' => $request->event_id,
+        //         'type' => 'regular',
+        //         'status' => 'booked',
+        //     ]);
+        // }
+
+        // return response()->json([
+        //     'message' => 'Payment stored successfully!',
+        // ]);
     }
 
     /**
@@ -51,18 +66,20 @@ class PaymentController extends Controller
      */
     public function update(PaymentRequest $request, string $id)
     {
-        $payment = Payment::findOrFail($id);
-        $payment->update([
-            'user_id' => $request->user_id,
-            'event_id' => $request->event_id,
-            'payment_method' => $request->payment_method,
-            'payment_status' => $request->payment_status,
-            'total_price' => $request->total_price,
-        ]);
+        // $priceOfTicket = Event::where('id', $request->event_id)->value('price');
+        // $payment = Payment::findOrFail($id);
+        // $payment->update([
+        //     'user_id' => $request->user_id,
+        //     'event_id' => $request->event_id,
+        //     'nu_of_tickets' => $request->nu_of_tickets,
+        //     'total_price' => $request->nu_of_tickets * $priceOfTicket,
+        //     'payment_method' => $request->payment_method,
+        //     'payment_status' => $request->payment_status,
+        // ]);
 
-        return response()->json([
-            'message' => 'Payment updated successfully!',
-        ]);
+        // return response()->json([
+        //     'message' => 'Payment updated successfully!',
+        // ]);
     }
 
     /**
@@ -83,5 +100,53 @@ class PaymentController extends Controller
         $mypayments = Payment::where('user_id', Auth::id())->get();
 
         return response()->json($mypayments);
+    }
+
+    public function charge(PaymentRequest $request)
+    {
+        $priceOfTicket = Event::where('id', $request->event_id)->value('price');
+
+        try {
+            // Set Stripe API Key
+            Stripe::setApiKey(env('STRIPE_SK'));
+
+            // Create a charge
+            $charge = Charge::create([
+                "amount" => $request->nu_of_tickets * $priceOfTicket, // Amount in cents (5000 = $50)
+                "currency" => "usd", // e.g., 'usd'
+                "source" => $request->token, // Card token
+                "description" => "Test Payment",
+            ]);
+
+            // Store in payments table
+            Payment::create([
+                'user_id' => Auth::id(),
+                'event_id' => $request->event_id,
+                'nu_of_tickets' => $request->nu_of_tickets,
+                'total_price' => $request->nu_of_tickets * $priceOfTicket,
+                'payment_method' => $request->payment_method,
+                'payment_status' => "paid",
+            ]);
+
+            // Store tickets
+            for($i=0; $i<$request->nu_of_tickets; $i++) {
+                Ticket::create([
+                    'user_id' => Auth::id(),
+                    'event_id' => $request->event_id,
+                    'type' => 'regular',
+                    'status' => 'booked',
+                ]);
+            }
+
+            return response()->json([
+                'message' => 'success',
+                'charge' => $charge
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

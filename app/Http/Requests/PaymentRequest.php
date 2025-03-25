@@ -25,11 +25,13 @@ class PaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'integer'],
+            // 'user_id' => ['required', 'integer'],
             'event_id' => ['required', 'integer'],
+            'nu_of_tickets' => ['required', 'integer'],
+            // 'total_price' => ['required', 'numeric'],
             'payment_method' => ['required', new Enum(PaymentMethod::class)],
-            'payment_status' => ['required', new Enum(PaymentStatus::class)],
-            'total_price' => ['required', 'numeric'],
+            // 'payment_status' => ['required', new Enum(PaymentStatus::class)],
+            'token' => ['required', 'string'],
         ];
     }
 }

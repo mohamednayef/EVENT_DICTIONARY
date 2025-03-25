@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users','id');
             $table->foreignId('event_id')->constrained('events','id');
-            $table->enum('payment_method',['vodafone_cash','myfawry','paypal'])->default('vodafone_cash');
-            $table->enum('payment_status',['paid','faild','refurded'])->default('paid');
+            $table->integer('nu_of_tickets');
             $table->decimal('total_price');
+            $table->enum('payment_method',['stripe'])->default('stripe');
+            $table->enum('payment_status',['paid','faild','refurded'])->default('paid');
             $table->timestamps();
             $table->softDeletes();
         });

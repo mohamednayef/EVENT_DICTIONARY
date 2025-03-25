@@ -13,9 +13,10 @@ class Payment extends Model
     protected $fillable = [
         'user_id',
         'event_id',
+        'nu_of_tickets',
+        'total_price',
         'payment_method',
         'payment_status',
-        'total_price',
     ];
 
     public function user()

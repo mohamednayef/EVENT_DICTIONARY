@@ -21,9 +21,10 @@ class PaymentFactory extends Factory
         return [
             'user_id' => fake()->numberBetween(1,39),
             'event_id' => fake()->numberBetween(1,39),
+            'nu_of_tickets' => fake()->numberBetween(1, 10),
+            'total_price' => fake()->randomFloat(2, 500, 5000),
             'payment_method' => fake()->randomElement(PaymentMethod::cases())->value,
             'payment_status' => fake()->randomElement(PaymentStatus::cases())->value,
-            'total_price' => fake()->randomFloat(2, 500, 5000),
         ];
     }
 }

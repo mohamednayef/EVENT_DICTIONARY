@@ -1,1 +1,3 @@
 token => 1|L9LDmmRta5rG30ZgSh1xW9wEP45RHRaYhglYbUyp31e4a1e9
+
+test card => 4242 4242 4242 4242, any three digits, any future date
