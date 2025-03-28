@@ -23,6 +23,7 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function() {
         'payments' => PaymentController::class, // Admin manages payments
         'tickets' => TicketController::class, // Admin manages tickets
         'categories' => CategoryController::class,
+        'bookmarks' => BookmarkController::class,
     ]);
 });
 
@@ -33,6 +34,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/bookmarks', [BookmarkController::class, 'store']); // Add bookmark
     Route::put('/bookmarks', [BookmarkController::class, 'update']); // update bookmark
     Route::get('/bookmarks', [BookmarkController::class, 'index']); // View bookmarks
+    Route::delete('/bookmarks/{id}', [BookmarkController::class, 'destroy']); // delete bookmarks
     Route::post('/reviews', [ReviewController::class, 'store']); // Submit reviews
     Route::get('/reviews', [ReviewController::class, 'index']); // All reviews
     Route::post('/tickets', [TicketController::class, 'store']); // Buy tickets
