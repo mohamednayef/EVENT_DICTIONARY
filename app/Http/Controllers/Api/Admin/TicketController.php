@@ -42,7 +42,13 @@ class TicketController extends Controller
     public function show(string $id)
     {
         $ticket = Ticket::findOrFail($id);
-        return response()->json($ticket);
+        if(Auth::id() == $ticket->user_id || Auth::user()->role == 'admin') {
+            return response()->json($ticket);
+        } else {
+            return response()->json([
+                'message' => 'U r not allowed to show this tickets, due to u r not admin or this ticket not yours, Thanks!',
+            ]);
+        }
     }
 
     /**

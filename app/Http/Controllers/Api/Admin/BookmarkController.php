@@ -24,13 +24,21 @@ class BookmarkController extends Controller
      */
     public function store(BookmarkRequest $request)
     {
+        $bookmark = Bookmark::where('user_id', Auth::id())->where('event_id', $request->event_id)->get();
+
+        if($bookmark->isNotEmpty()) {
+            return response()->json([
+                'message' => 'The bookmark is already Stored!',
+            ]);
+        }
+        
         Bookmark::create([
-            'user_id' => $request->user_id,
+            'user_id' => Auth::id(),
             'event_id' => $request->event_id,
         ]);
-
+        
         return response()->json([
-            'message' => 'The book mark Stored Successfully!',
+            'message' => 'success',
         ]);
     }
 
@@ -65,11 +73,17 @@ class BookmarkController extends Controller
     public function destroy(string $id)
     {
         $bookmark = Bookmark::findOrFail($id);
-        $bookmark->delete();
-
-        return response()->json([
-            'message' => 'The Bookmark Deleted Succesfully!',
-        ]);
+        if(Auth::user()->role == 'admin' || Auth::id() == $bookmark->user_id) {
+            $bookmark->forceDelete();
+    
+            return response()->json([
+                'message' => 'The Bookmark Deleted Succesfully!',
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'U r not allowed to delete this bookmark, due to u r not admin or this bookmark not yours, Thanks!',
+            ]);
+        }
     }
 
     public function mybookmarks()

@@ -25,11 +25,12 @@ class EventController extends Controller
     public function store(EventRequest $request)
     {
         // return $request;
-        Event::create([
+        $event = Event::create([
+            'category_id' => $request->category_id,
+            'category' => $request->category,
             'name' => $request->name,
             'description' => $request->description,
             'date' => $request->date,
-            'category' => $request->category,
             'location' => $request->location,
             'capacity' => $request->capacity,
             'available_tickets' => $request->capacity,
@@ -37,7 +38,8 @@ class EventController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'The event added successfully!',
+            'message' => 'success',
+            'event' => $event,
         ]);
     }
 
@@ -57,17 +59,19 @@ class EventController extends Controller
     {
         $event = Event::findOrFail($id);
         $event->update([
+            'category_id' => $request->category_id,
+            'category' => $request->category,
             'name' => $request->name,
             'description' => $request->description,
             'date' => $request->date,
-            'category' => $request->category,
             'location' => $request->location,
             'capacity' => $request->capacity,
             'price' => $request->price,
         ]);
 
         return response()->json([
-            'message' => 'The event updated successfully!',
+            'message' => 'success',
+            'event' => $event,
         ]);
     }
 
@@ -80,7 +84,7 @@ class EventController extends Controller
         $event->delete();
 
         return response()->json([
-            'message' => 'The event deleted successfully!',
+            'message' => 'success',
         ]);
     }
 }

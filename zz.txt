@@ -1,3 +1,4 @@
-token => 1|L9LDmmRta5rG30ZgSh1xW9wEP45RHRaYhglYbUyp31e4a1e9
+token admin@eventdictionary.com => 1|L9LDmmRta5rG30ZgSh1xW9wEP45RHRaYhglYbUyp31e4a1e9
+token user@eventdictionary.com => 2|kRECH6Xo1yhz5nBAV0MIXSd8kubwBPLkgkx5dj9w1b59f9af
 
 test card => 4242 4242 4242 4242, any three digits, any future date

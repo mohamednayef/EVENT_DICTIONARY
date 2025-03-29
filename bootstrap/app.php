@@ -10,6 +10,7 @@ use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsAuth;
 use App\Http\Middleware\IsUser;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -27,7 +28,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'IsAdmin' => IsAdmin::class,
+            'IsAdmin' => IsAdmin::class, 
         ]);
         
     })

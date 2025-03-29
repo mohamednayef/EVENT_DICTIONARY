@@ -31,25 +31,27 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function() {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/events', [EventController::class, 'index']); // View events
     Route::get('/events/{id}', [EventController::class, 'show']); // View specific event
+
     Route::post('/bookmarks', [BookmarkController::class, 'store']); // Add bookmark
-    Route::put('/bookmarks', [BookmarkController::class, 'update']); // update bookmark
-    Route::get('/bookmarks', [BookmarkController::class, 'index']); // View bookmarks
     Route::delete('/bookmarks/{id}', [BookmarkController::class, 'destroy']); // delete bookmarks
-    Route::post('/reviews', [ReviewController::class, 'store']); // Submit reviews
-    Route::get('/reviews', [ReviewController::class, 'index']); // All reviews
-    Route::post('/tickets', [TicketController::class, 'store']); // Buy tickets
-    Route::get('/tickets/{id}', [TicketController::class, 'show']); // Show specific ticket
-    Route::put('/tickets/{id}', [TicketController::class, 'update']); // Update specific ticket
-    Route::post('/payments', [PaymentController::class, 'store']); // Make payments
-    
-    Route::get('/mytickets', [TicketController::class, 'mytickets']);
-    Route::get('/mypayments', [PaymentController::class, 'mypayments']);
     Route::get('/mybookmarks', [BookmarkController::class, 'mybookmarks']);
+
+    Route::post('/reviews', [ReviewController::class, 'store']); // Submit reviews
+
+    Route::get('/tickets/{id}', [TicketController::class, 'show']); // Show specific ticket
+    Route::get('/mytickets', [TicketController::class, 'mytickets']);
+    
+    Route::post('/payments', [PaymentController::class, 'store']); // Make payments
+    Route::get('/mypayments', [PaymentController::class, 'mypayments']);
 
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::get('/categories/{id}', [CategoryController::class, 'show']);
 
     Route::post('/charge', [PaymentController::class, 'charge']);
+
+    Route::get('/profile', [UserController::class, 'profile']);
+    Route::put('/profile', [UserController::class, 'updateMyProfile']);
+    Route::delete('/profile', [UserController::class, 'deleteMyProfile']);
     
     Route::post('/logout', [AuthController::class, 'logout']);
 });

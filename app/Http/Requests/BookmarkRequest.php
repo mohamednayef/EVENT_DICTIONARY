@@ -22,7 +22,7 @@ class BookmarkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'integer'],
+            // 'user_id' => ['required', 'integer'],
             'event_id' => ['required', 'integer'],
         ];
     }

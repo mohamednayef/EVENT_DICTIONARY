@@ -57,12 +57,12 @@ class UserRequest extends FormRequest
             'lname' => ['sometimes', 'string', 'max:30'],
             'username' => ['sometimes', 'string', 'max:30', Rule::unique('users', 'username')->ignore($this->id)],
             'email' => ['sometimes', 'email', Rule::unique('users', 'email')->ignore($this->id)],
-            'email_verified_at' => ['sometimes', now()],
-            'password' => 'sometimes|min:8',
+            'email_verified_at' => ['sometimes', 'date'], // ✅ Fixed
+            'password' => ['sometimes', 'min:8'],
             'phone' => ['sometimes', 'required', 'string', 'max:11', Rule::unique('users', 'phone')->ignore($this->id)],
-            'image_path' => ['sometimes', null],
-            'gender' => ['sometimes', 'M'],
-            'role' => ['sometimes', new Enum(Role::class)],
+            'image_path' => ['sometimes', 'nullable', 'string'], // ✅ Fixed
+            'gender' => ['sometimes', 'in:M,F'], // ✅ Fixed
+            'role' => ['sometimes', 'nullable', new Enum(Role::class)], // ✅ Fixed
         ];
     }
 
