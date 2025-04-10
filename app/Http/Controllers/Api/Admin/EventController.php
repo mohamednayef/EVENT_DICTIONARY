@@ -40,7 +40,7 @@ class EventController extends Controller
             'capacity' => $request->capacity,
             'available_tickets' => $request->capacity,
             'price' => $request->price,
-            'image_path' => $imagePath,
+            'image_path' => "http://localhost:8000/storage/".$imagePath,
         ]);
 
         return response()->json([
@@ -64,6 +64,15 @@ class EventController extends Controller
     public function update(EventRequest $request, string $id)
     {
         $event = Event::findOrFail($id);
+
+        $imagePath = null;
+        dd($request->category_id);
+        dd($request->hasFile('image_path'));
+        if($request->hasFile('image_path')) {
+            $image = $request->file('image_path');
+            $imagePath = $image->store('event', 'public');
+        }
+
         $event->update([
             'category_id' => $request->category_id,
             'category' => $request->category,
@@ -73,6 +82,7 @@ class EventController extends Controller
             'location' => $request->location,
             'capacity' => $request->capacity,
             'price' => $request->price,
+            'image_path' => $imagePath,
         ]);
 
         return response()->json([
