@@ -24,7 +24,12 @@ class EventController extends Controller
      */
     public function store(EventRequest $request)
     {
-        // return $request;
+        $imagePath = null;
+        if($request->hasFile('image_path')) {
+            $image = $request->file('image_path');
+            $imagePath = $image->store('event', 'public');
+        }
+
         $event = Event::create([
             'category_id' => $request->category_id,
             'category' => $request->category,
@@ -35,6 +40,7 @@ class EventController extends Controller
             'capacity' => $request->capacity,
             'available_tickets' => $request->capacity,
             'price' => $request->price,
+            'image_path' => $imagePath,
         ]);
 
         return response()->json([

@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\validation\Rules\Enum;
 use App\Enums\Category;
+use Illuminate\Support\Facades\Storage;
 
 class EventRequest extends FormRequest
 {
@@ -33,6 +34,8 @@ class EventRequest extends FormRequest
             'location' => ['required', 'string'],
             'capacity' => ['required', 'integer', 'min:1', 'max:5000'],
             'price' => ['required', 'numeric'],
+
+            'image_path' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
         ];
     }
 
