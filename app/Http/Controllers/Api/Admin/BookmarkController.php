@@ -72,7 +72,12 @@ class BookmarkController extends Controller
      */
     public function destroy(string $id)
     {
-        $bookmark = Bookmark::findOrFail($id);
+        $bookmark = Bookmark::where('event_id', $id)->where('user_id', Auth::id());
+        dd($bookmark->user_id);
+        // dd(Auth::user()->role == 'admin');
+        // dd(Auth::id() == $bookmark->user_id);
+        // dd(Auth::id());
+        dd($bookmark->user_id);
         if(Auth::user()->role == 'admin' || Auth::id() == $bookmark->user_id) {
             $bookmark->forceDelete();
     

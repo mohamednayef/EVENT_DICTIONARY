@@ -18,10 +18,14 @@ class IsAdmin
     {
         if(Auth::check()) {
             if(Auth::user()->role != 'admin') {
-                return response()->json('message', 'You are not allowed to access this page');
+                return response()->json([
+                    'message' => 'You are not allowed to access this page'
+                ]);
             }
         } else {
-            return response()->json(['message', 'U r not loged in']);
+            return response()->json([
+                'message' => 'U r not loged in'
+            ]);
         }
         return $next($request);
     }

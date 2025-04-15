@@ -15,17 +15,7 @@ Route::get('/', function() {
     return '<h1 align="center">welcome in api</h1>';
 });
 
-// Admin only routes
-Route::middleware(['auth:sanctum','IsAdmin'])->group(function() {
-    Route::apiResources([
-        'users' => UserController::class,   // Manage users (Admin only)
-        'events' => EventController::class, // Admin manages events
-        'payments' => PaymentController::class, // Admin manages payments
-        'tickets' => TicketController::class, // Admin manages tickets
-        'categories' => CategoryController::class,
-        'bookmarks' => BookmarkController::class,
-    ]);
-});
+
 
 // Routes for Authenticated Users
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -58,3 +48,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+
+// Admin only routes
+Route::middleware(['auth:sanctum','IsAdmin'])->group(function() {
+    Route::apiResources([
+        'users' => UserController::class,   // Manage users (Admin only)
+        'events' => EventController::class, // Admin manages events
+        'payments' => PaymentController::class, // Admin manages payments
+        'tickets' => TicketController::class, // Admin manages tickets
+        'categories' => CategoryController::class,
+        'bookmarks' => BookmarkController::class,
+    ]);
+});
