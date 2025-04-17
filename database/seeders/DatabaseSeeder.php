@@ -21,15 +21,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(UserSeeder::class);
-        $this->call(PersonalAccessTokenSeeder::class);
+        // $this->call(PersonalAccessTokenSeeder::class);
         $this->call(CategorySeeder::class);
 
-        User::factory()->count(39)->create();
+        // User::factory()->count(39)->create();
         // Category::factory()->count(39)->create();
-        Event::factory()->count(39)->create();
-        Ticket::factory()->count(39)->create();
-        Bookmark::factory()->count(39)->create();
-        Review::factory()->count(39)->create();
-        Payment::factory()->count(39)->create();
+        // Event::factory()->count(39)->create();
+        // Ticket::factory()->count(39)->create();
+        // Bookmark::factory()->count(39)->create();
+        // Review::factory()->count(39)->create();
+        // Payment::factory()->count(39)->create();
     }
 }
