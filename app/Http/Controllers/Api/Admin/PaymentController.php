@@ -135,6 +135,7 @@ class PaymentController extends Controller
                     'event_id' => $request->event_id,
                     'type' => 'regular',
                     'status' => 'booked',
+                    'price' => $priceOfTicket,
                 ]);
             }
 
