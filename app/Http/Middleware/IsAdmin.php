@@ -19,7 +19,7 @@ class IsAdmin
         if(Auth::check()) {
             if(Auth::user()->role != 'admin') {
                 return response()->json([
-                    'message' => 'You are not allowed to access this page'
+                    'message' => 'You are not allowed to access this page, (isAdminMiddleWare)'
                 ]);
             }
         } else {

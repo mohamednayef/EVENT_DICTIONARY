@@ -31,7 +31,7 @@ class BookmarkController extends Controller
                 'message' => 'The bookmark is already Stored!',
             ]);
         }
-        
+
         Bookmark::create([
             'user_id' => Auth::id(),
             'event_id' => $request->event_id,
@@ -58,7 +58,7 @@ class BookmarkController extends Controller
     {
         $bookmark = Bookmark::findOrFail($id);
         $bookmark->update([
-            'user_id' => $request->user_id,
+            'user_id' => $request->Auth::id(),
             'event_id' => $request->event_id,
         ]);
 
@@ -72,13 +72,8 @@ class BookmarkController extends Controller
      */
     public function destroy(string $id)
     {
-        $bookmark = Bookmark::where('event_id', $id)->where('user_id', Auth::id());
-        dd($bookmark->user_id);
-        // dd(Auth::user()->role == 'admin');
-        // dd(Auth::id() == $bookmark->user_id);
-        // dd(Auth::id());
-        dd($bookmark->user_id);
-        if(Auth::user()->role == 'admin' || Auth::id() == $bookmark->user_id) {
+        $bookmark = Bookmark::where('event_id', $id)->where('user_id', Auth::id())->first();
+        if($bookmark != null && (Auth::user()->role == 'admin' || Auth::id() == $bookmark->user_id)) {
             $bookmark->forceDelete();
     
             return response()->json([

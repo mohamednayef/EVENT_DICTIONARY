@@ -24,8 +24,6 @@ class EventRequest extends FormRequest
      */
     public function rules(): array
     {
-        return ["here"];
-        // dd($request->hasFile('image_path'));
         return [
             'category_id' => ['required', 'integer'],
             'category' => ['required', 'string'],

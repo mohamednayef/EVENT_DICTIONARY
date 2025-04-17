@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Http\Requests\EventRequest;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -65,10 +66,12 @@ class EventController extends Controller
     {
         $event = Event::findOrFail($id);
 
-        $imagePath = null;
-        dd($request->category_id);
-        dd($request->hasFile('image_path'));
+        $imagePath = explode("storage/", $event->image_path)[1];
         if($request->hasFile('image_path')) {
+            // Delete the image first.
+            if ($event->image_path && Storage::disk('public')->exists($imagePath) && $imagePath != "event/default.jpg") {
+                Storage::disk('public')->delete($imagePath);
+            }
             $image = $request->file('image_path');
             $imagePath = $image->store('event', 'public');
         }
@@ -82,7 +85,7 @@ class EventController extends Controller
             'location' => $request->location,
             'capacity' => $request->capacity,
             'price' => $request->price,
-            'image_path' => $imagePath,
+            'image_path' => "http://localhost:8000/storage/".$imagePath,
         ]);
 
         return response()->json([

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('capacity');
             $table->unsignedBigInteger('available_tickets');
             $table->decimal('price');
-            $table->text('image_path')->nullable();
+            $table->text('image_path')->default("http://localhost:8000/storage/event/default.jpg");
             $table->timestamps();
             $table->softDeletes();
         });
