@@ -139,6 +139,13 @@ class PaymentController extends Controller
                 ]);
             }
 
+            // Decerase available tickets
+            $currentEvent = Event::findorfail($request->event_id);
+            $currentEvent->available_tickets -= $request->nu_of_tickets;
+            $currentEvent->update([
+                'available_tickets' => ($currentEvent->available_tickets - $request->nu_of_tickets),
+            ]);
+
             return response()->json([
                 'message' => 'success',
                 'charge' => $charge
