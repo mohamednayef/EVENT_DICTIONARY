@@ -19,7 +19,7 @@ Route::get('/', function() {
 
 // Routes for Authenticated Users
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/events', [EventController::class, 'index']); // View events
+    Route::apiResource('/events', EventController::class); // View events
     Route::get('/events/{id}', [EventController::class, 'show']); // View specific event
 
     // Route::get('/bookmarks', [BookmarkController::class, 'index']); // All bookmark
@@ -57,7 +57,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware(['auth:sanctum','IsAdmin'])->group(function() {
     Route::apiResources([
         'users' => UserController::class,   // Manage users (Admin only)
-        'events' => EventController::class, // Admin manages events
+        // 'events' => EventController::class, // Admin manages events
         'payments' => PaymentController::class, // Admin manages payments
         'tickets' => TicketController::class, // Admin manages tickets
         'categories' => CategoryController::class,
